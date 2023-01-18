@@ -34,4 +34,3 @@ int main() { IOS // freopen("in.txt", "r", stdin); freopen("out.txt", "w", stdou
 
 
 }
- 
