@@ -8,9 +8,8 @@ void print_bits(ll n, ll size) {
     print_bits(n>>1, size-1);
     cout << (n&1);
 }
-////////////////////////////
-
-// count 0s and 1s in binary
+///////////////////////////////
+// count 0s and 1s in binary //
 pair<ll,ll> bits_count(ll n) {
     ll ones{},zeros{};
     while(n) {
@@ -19,4 +18,18 @@ pair<ll,ll> bits_count(ll n) {
     }
     pair<ll,ll> ans{zeros,ones};
     return ans;
+}
+/////////////////////////////////
+// Other Important operations //
+int get_bit(ll num, int i) {
+    return ((num>>i) & 1) == 1;
+}
+ll set_bit1(ll num, int i) {
+    return num | (1<<i);
+}
+ll set_bit0(ll num, int i) {
+    return num & ~(1<<i);
+}
+ll flip_bit(ll num, int i) {
+    return num ^ (1<<i);
 }
