@@ -9,15 +9,22 @@ void print_bits(ll n, ll size) {
     cout << (n&1);
 }
 ///////////////////////////////
-// count 0s and 1s in binary //
-pair<ll,ll> bits_count(ll n) {
-    ll ones{},zeros{};
+// count 1s in binary //
+int bits_count(ll n) {
+    int count{};
     while(n) {
-        if(n&1) ones++; else zeros++;
+        if(n&1) count++;
         n >>= 1;
     }
-    pair<ll,ll> ans{zeros,ones};
-    return ans;
+    return count;
+}
+int bits_count2(ll n) {
+    int count{};
+    while(n) {
+        n &= (n-1);
+        count++;
+    }
+    return count;
 }
 /////////////////////////////////
 // Other Important operations //
