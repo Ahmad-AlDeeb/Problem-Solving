@@ -8,6 +8,12 @@ void print_bits(ll n, ll size) {
     print_bits(n>>1, size-1);
     cout << (n&1);
 }
+void print_all_subsets(int size) {
+    for(int i{}; i<(1<<size); i++) {
+        print_bits(i,size);
+        cout << endl;
+    }
+}
 ///////////////////////////////
 // count 1s in binary //
 int bits_count(ll n) {
