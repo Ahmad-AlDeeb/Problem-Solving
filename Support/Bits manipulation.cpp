@@ -46,3 +46,25 @@ ll set_bit0(ll num, int i) {
 ll flip_bit(ll num, int i) {
     return num ^ (1<<i);
 }
+/////////////////////////////////
+/////// My New Functions ////////
+ll get_fullset(ll n) {
+    for(ll i{};;i++)
+        if(pow(2,i) > n)
+            return pow(2,i)-1;
+}
+ll get_flipped(ll n) {
+    string binary;
+    while(n) {
+        if(n%2 == 0) binary.pb('0');
+        else binary.pb('1');
+        n /= 2;
+    }
+ 
+    ll result{};
+    for(ll i{}; i<binary.size(); i++) {
+        if(binary[i]=='0')
+            result += pow(2,i);
+    }
+    return result;
+}
