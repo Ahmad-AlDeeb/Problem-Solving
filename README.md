@@ -2,7 +2,7 @@
 ## **1. Reading:**
 - Be Systematic
 - Write highlights
-- Analyze Constrains 
+- Analyze constrains 
 - Trace samples 
 ## **2. Thinking:**
 - Simplify
