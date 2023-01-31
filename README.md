@@ -1,9 +1,9 @@
 # **Problem Phases Disciplines**
 ## **1. Reading:**
-- Systematic
+- Be Systematic
 - Write highlights
-- Constrains analysis
-- Tracing samples 
+- Analyze Constrains 
+- Trace samples 
 ## **2. Thinking:**
 - Simplify
 - Think concretely, symbolically, & pictoirally
@@ -14,6 +14,6 @@
 ## **4. Debugging:**
 ## **5. Testing:**
 ## **6. Post-AC:**
-- Tutorial
-- Other codes
-- Save on GitHub 
+- Check tutorial
+- Check other codes
+- Save best version on GitHub 
