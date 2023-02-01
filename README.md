@@ -14,6 +14,8 @@
 ## **4. Debugging:**
 ## **5. Testing:**
 ## **6. Post-AC:**
+- Analyze performance
 - Check tutorial
 - Check other codes
-- Save best version on GitHub 
+- Save best version on GitHub
+- Record lessons learned
