@@ -1,4 +1,4 @@
-bool binary_search(vector<ll>&vec, int x, int left, int right) {
+bool binary_search(vector<ll>&vec, ll x, int ll, int ll) {
     if(left > right) return false;
     int mid {(left+right)/2};
     if(vec[mid] == x) return true;
