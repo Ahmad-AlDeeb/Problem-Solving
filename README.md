@@ -15,7 +15,7 @@
 ## **5. Testing:**
 - Check corner cases
 ## **6. Post-AC:**
-- Analyze performance
+- Analyze performance (if worth it)
 - Check tutorial
 - Check other codes
 - Save best version on GitHub (if worth it)
