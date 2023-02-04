@@ -4,7 +4,7 @@
 - Analyze constrains 
 - Write highlights (if not easy)
 - Trace samples (if not easy)
-## **2. Thinking:**
+## **2. Thinking:(if not initiative)**
 - Simplify
 - Think concretely, symbolically, & pictoirally
 - Divide-and-conquer
@@ -19,4 +19,4 @@
 - Check tutorial
 - Check other codes
 - Save best version on GitHub
-- Record lessons learned
+- Record lessons learned (if any exist)
