@@ -1,9 +1,9 @@
 # **Problem Phases Disciplines**
 ## **1. Reading:**
 - Be Systematic
-- Write highlights
 - Analyze constrains 
-- Trace samples 
+- Write highlights (if not easy)
+- Trace samples (if not easy)
 ## **2. Thinking:**
 - Simplify
 - Think concretely, symbolically, & pictoirally
