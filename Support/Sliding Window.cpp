@@ -1,3 +1,4 @@
+// Max sum of k consecutive elements
 ll max_sum(vector<ll>&vec, ll n, ll k) {
     ll max_sum{};
     for(ll i{}; i<=n-k; i++) {
