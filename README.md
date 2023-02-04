@@ -13,6 +13,7 @@
 ## **3. Coding:**
 ## **4. Debugging:**
 ## **5. Testing:**
+- Check corner cases
 ## **6. Post-AC:**
 - Analyze performance
 - Check tutorial
