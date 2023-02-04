@@ -4,7 +4,7 @@
 - Analyze constrains 
 - Write highlights (if not easy)
 - Trace samples (if not easy)
-## **2. Thinking:(if not initiative)**
+## **2. Thinking: (if not initiative)**
 - Simplify
 - Think concretely, symbolically, & pictoirally
 - Divide-and-conquer
