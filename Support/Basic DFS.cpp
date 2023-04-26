@@ -18,3 +18,24 @@ ll connected_components_cnt() {
         dfs(i),cnt++;
     return cnt;
 }
+//////// Bipartite graph 
+vector<vector<ll>>graph;
+vector<ll>visited;
+enum status {path=0, cycle=1};
+ 
+status dfs(ll current, ll parent, ll &count) {
+    if(visited[current])
+        return cycle;
+    visited[current] = 1;
+ 
+    for(ll child:graph[current])
+        if(child!=parent) {
+            count++;
+ 
+            status s = dfs(child, current, count);
+            if(s == cycle)
+                return cycle;
+ 
+        }
+    return path;
+}
