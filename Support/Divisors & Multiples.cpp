@@ -1,9 +1,9 @@
 ////////////////////////////////// Factors //////////////////////////////////////
-vector<ll>factors;
+vector<ll>divisors;
 for(int i{1}; i*i<=x; i++) 
     if(x%i == 0) {
-        factors.push_back(x);
-        if(i*i != x) factors.push_back(x/i);
+        divisors.push_back(x);
+        if(i*i != x) divisors.push_back(x/i);
     }
 ///////////////////////////////////  Multiples /////////////////////////////////////////
 vector<vector<ll>>multiples(MAX);
