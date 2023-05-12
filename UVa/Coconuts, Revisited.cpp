@@ -148,16 +148,27 @@ void fast() {
     ll coco;
     while(cin >> coco) {
         if(coco == -1) break;
-        
+        if(coco==1 || coco==0) {cout << coco << " coconuts, no solution" << endl; continue;}
+
+        vector<ll>factors; ll x{coco-1};
+        for(int i{1}; i*i<=x; i++)
+            if(x%i == 0) {
+                if(i!=1) factors.push_back(i);
+                if(i*i != x) factors.push_back(x/i);
+            }
+
+        sort(all(factors));
         ll people{};
-        for(ll i=sqrt(coco)+1; i>=2; i--)
-            if(valid(i,coco))
-                {people = i; break;}
+        for(auto ans:factors)
+            if(valid(ans,coco))
+                people = ans;
 
         if(!people) cout << coco << " coconuts, no solution";
         else        cout << coco << " coconuts, " << people << " people and 1 monkey";
         cout << endl;
     }
+
+
 }
 /////////////////////////////////////////////////////////////////////////////////////
 int main() { IOS
