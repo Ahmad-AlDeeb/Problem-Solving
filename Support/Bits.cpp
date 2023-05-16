@@ -27,8 +27,10 @@ void get_all_submasks(ll n) {
         print_bits(sub, ones_cnt(n));
     // for reverse: ~sub & n = sub^n
 }
-///////////////////////////////
-// count bits //
+/////////// count bits ////////////
+ll bits_count(ll n) {
+    return (LL)log2(n)+1;
+}
 pair<ll,ll> bits_count(ll n) {
     ll zero{}, one{};
     while(n) {
@@ -59,8 +61,30 @@ ll set_bit0(ll num, int i) {
 ll flip_bit(ll num, int i) {
     return num ^ (1<<i);
 }
-/////////////////////////////////
-/////// My New Functions ////////
+///////// BIGGER Array for bigger visited numbers ! ////////////
+bool VIS[10000000000/8];
+void set_vis(ll n) {
+    set_bit1(VIS[n>>3], VIS[1<<(n&7)]);
+}
+bool is_vis(ll n) {
+    return get_bit(VIS[n>>3], VIS[1<<(n&7)]);
+}
+///////////////////// Bitset ///////////////////
+ll n {10};
+bitset<6> x (n);
+x.set();
+x.flip();
+x.count();
+x.any();
+x.none();
+x.test(1);
+x.to_ullong();
+// logic operators & assignment works!
+cout << x << endl;
+cout << x.to_string() << endl;
+for(ll i=x.size()-1; i>=0; i--)
+    cout << x[i];
+///////////////////// My New Functions ///////////////////
 ll get_fullset(ll n) {
     for(ll i{};;i++)
         if(pow(2,i) > n)
