@@ -2,40 +2,53 @@
 string binary = bitset<32>(n).to_string(); // 1st way
 // or by dividing n by 2 and pushing back the remainder till n becomes 0 (2nd way)
 // or (3rd way)
-void print_bits(ll n, int size) {
+void print_bits(ll n, ll size) {
     if(!size) return;
-
-    print_bits(n>>1, size-1);
+    print_bits(n, size-1);
     cout << (n&1);
 }
-void print_all_subsets(int size) {
+void get_all_subsets(int size) {
     for(int i{}; i<(1<<size); i++) {
         print_bits(i,size);
         cout << endl;
     }
 }
+ll gray_code(ll n) {
+    return n ^ (n>>1);
+}
+void get_all_subsets_gray(ll size) {
+    for(ll i{}; i<(1<<size); i++) {
+        print_bits(gray_code(i),size);
+        cout << endl;
+    }
+}
+void get_all_submasks(ll n) {
+    for(ll sub{n}; sub; sub = (sub-1)&n)
+        print_bits(sub, ones_cnt(n));
+    // for reverse: ~sub & n = sub^n
+}
 ///////////////////////////////
-// count 1s in binary //
-int bits_count(ll n) {
-    int count{};
+// count bits //
+pair<ll,ll> bits_count(ll n) {
+    ll zero{}, one{};
     while(n) {
-        if(n&1) count++;
+        if(n&1) one++; else zero++;
         n >>= 1;
     }
-    return count;
+    return {zero,one};
 }
-int bits_count2(ll n) {
-    int count{};
+ll ones_cnt(ll n) { // or use __builtin_popcount()
+    ll cnt{};
     while(n) {
         n &= (n-1);
-        count++;
+        cnt++;
     }
-    return count;
+    return cnt;
 }
 /////////////////////////////////
 // Other Important operations //
-int get_bit(ll num, int i) {
-    return ((num>>i) & 1) == 1;
+ll get_bit(ll n, ll i) {
+    return ((n>>i) & 1);
 }
 ll set_bit1(ll num, int i) {
     return num | (1<<i);
