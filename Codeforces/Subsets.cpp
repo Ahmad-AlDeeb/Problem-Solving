@@ -198,39 +198,36 @@ ll comb(ll n, ll r) {
     return ans;
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-vector<string>subsets;
+vector<string>subs;
 void print_bits(ll n, ll size) {
     string sub;
     for(ll i{}; i<size; i++)
         sub += to_string(1 & (n>>i));
     reverse(all(sub));
-    subsets.pb(sub);
+    subs.pb(sub);
 }
 void get_subsets(ll size) {
     for(ll i{}; i<(1<<size); i++)
         print_bits(i,size);
 }
+
+
 void fast() {
     ll n; cin >> n;
     vector<ll>vec(n); for(auto &i:vec) cin >> i;
-
     get_subsets(n);
-    vector<vector<ll>>ans;
-    for(auto sub:subsets) {
-        vector<ll> comb;
-        for(ll i{}; i<sub.size(); i++)
-            if(sub[i]-'0') comb.pb(vec[i]);
-        ans.pb(comb);
-    }
 
-    sort(all(ans));
-    for(auto &i:ans) {
-        for(ll j{}; j<i.size(); j++) {
-            cout << i[j];
-            if(j!=i.size()-1) cout << " ";
-        }
-        cout << endl;
+    ll ans{};
+    for(auto s:subs) {
+        ll evens{},odds{};
+        for(ll i{}; i<n; i++)
+            if(s[i]-'0') {
+                if(vec[i]&1) odds++;
+                else evens++;
+            }
+        if(evens > odds) ans++;
     }
+    cout << ans;
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 int main() { IOS
@@ -241,7 +238,7 @@ int main() { IOS
 //    cin >> tc;
     while(tc--) {
         fast();
-//        cout << endl;
+        cout << endl;
     }
 //    while(true) {
 ////        ll n = 2601;
