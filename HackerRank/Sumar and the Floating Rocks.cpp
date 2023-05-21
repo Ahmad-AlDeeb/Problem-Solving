@@ -21,13 +21,7 @@ int gcd(int a, int b) {
     else return a;
 }
 int solve(int x1, int y1, int x2, int y2) {
-    int min_x = min(x1,x2);
-    x1 -= min_x;
-    x2 -= min_x;
-    int min_y = min(y1,y2);
-    y1 -= min_y;
-    y2 -= min_y;
-    return gcd(max(x1,x2),max(y1,y2))-1;
+    return gcd(abs(x1-x2),abs(y1-y2))-1;
 }
 
 int main()
