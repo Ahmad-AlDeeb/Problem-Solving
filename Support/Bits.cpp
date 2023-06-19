@@ -4,7 +4,7 @@ string binary = bitset<32>(n).to_string(); // 1st way
 // or (3rd way)
 void print_bits(ll n, ll size) {
     if(!size) return;
-    print_bits(n, size-1);
+    print_bits(n>>1, size-1);
     cout << (n&1);
 }
 void get_all_subsets(int size) {
