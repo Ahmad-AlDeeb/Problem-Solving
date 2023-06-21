@@ -24,3 +24,13 @@ ll sumDiv(ll n) {
     if(n != 1) ans *= (n+1); // N^2-1/N-1 = N+1
     return ans;
 }
+// get number of coprimes to n and less than n (using prime factors)
+ll euler(ll n) {
+    ll cnt{n};
+    for(ll i{2}; i*i<=n; i++) {
+        if(n%i==0) cnt -= cnt/i;
+        while(n%i == 0) n/=i;
+    }
+    if(n != 1) cnt -= cnt/n;
+    return cnt;
+}
