@@ -30,7 +30,7 @@ void get_all_submasks(ll n) {
 
 /////////// count bits ////////////
 ll bits_count(ll n) {
-    return (LL)log2(n)+1;
+    return (ll)log2(n)+1;
 }
 pair<ll,ll> bits_count(ll n) {
     ll zero{}, one{};
