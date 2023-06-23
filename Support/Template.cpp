@@ -12,6 +12,7 @@
 #include<map>
 #include<bitset>
 #include<sstream>
+#include<limits>
 #include <ext/pb_ds/assoc_container.hpp>
 #include <ext/pb_ds/tree_policy.hpp>
 using namespace __gnu_pbds;
@@ -26,18 +27,40 @@ using namespace std;
 #define ld long double
 #define pb push_back
 #define all(v) v.begin(), v.end()
+#define vll vector<long long>
 const ll inf = 1e18;
 const ll M = 1e9+7;
 const ll SZ = 200005;
-vector<ll> di {0,0,1,-1};
-vector<ll> dj {1,-1,0,0};
-string letters{" abcdefghijklmnopqrstuvwxyz"};
+vll di {0,0,1,-1};
+vll dj {1,-1,0,0};
+string letters{"abcdefghijklmnopqrstuvwxyz"};
+const ld PI = 3.14159265358979323846;
 
-ll power(ll x, ll y) {
+bool is_int(ld double_num) {
+    ll int_num = double_num;
+    return int_num == double_num;
+}
+int comp_double(ld a, ld b) {
+    if(fabs(a-b) <= 1e-10) return -1;
+    return a>b? 1:0;
+}
+ll mod(ll x, ll m){
+    return (x%m +m) % m;
+}
+ll pow(ll x, ll y) {
     ll ans{1};
     while(y) {
-        if(y&1) ans = ((ans%inf)*(x%inf)) % inf;
-        x = ((x%inf) * (x%inf)) %inf;
+        if(y&1) ans *= x;
+        x *= x;
+        y /= 2;
+    }
+    return ans;
+}
+ll big_pow(ll x, ll y) {
+    ll ans{1};
+    while(y) {
+        if(y&1) ans = ((ans%M)*(x%M)) % M;
+        x = ((x%M) * (x%M)) %M;
         y/=2;
     }
     return ans;
@@ -49,46 +72,14 @@ ll gcd(ll a, ll b) {
 ll lcm(ll a, ll b) {
     return a*b / gcd(a,b);
 }
-ld distance(ll x1, ll y1, ll x2, ll y2) {
+ld dist(ll x1, ll y1, ll x2, ll y2) {
     return sqrt(pow((x1-x2),2) + pow((y1-y2),2));
 }
-vector<ll> p_fact(ll x) {
-    ll i{2}; vector<ll> p;
-    for(; i*i <= x; i++) {
-        if(x%i == 0) p.pb(i);
-        while(x%i == 0) x /= i;
-    }
-    if(x != 1) p.push_back(x);
-    return p;
+pair<ld,ld> quad(ld a, ld b, ld c) {
+    ld sq = sqrt(pow(b,2LL)-4*a*c);
+    return {-b+(sq)/2*a, -b-(sq)/2*a};
 }
-bool is_int(dd double_num) {
-    int int_num = double_num;
-    if(int_num == double_num)
-        return true;
-    return false;
-}
-bool is_prime(ll x) {
-    for(ll i{2}; i*i<=x; i++)
-        if(x%i == 0) return false;
-    return true;
-}
-int comp_double(ld a, ld b) {
-    if(fabs(a-b) <= 1e-10) return -1;
-    return a>b? 1:0;
-}
-vector<ll> sieve(ll n) {
-    vector<bool>primes(n+1,true);
-    for(ll i{2}; i*i<=n; i++)
-        if(primes[i])
-            for(ll j{i*i}; j<=n; j+=i)
-                primes[j]=false;
-
-    vector<ll>ans;
-    for(ll i{2}; i<=n; i++)
-        if(primes[i]) ans.pb(i);
-    return ans;
-}
-void coordinate_compress(vector<ll>&axis, ll start=2, ll step=2) {
+void coordinate_compress(vll &axis, ll start=2, ll step=2) {
     set<ll> s (axis.begin(), axis.end());
     map<ll,ll> index;
 
@@ -99,7 +90,7 @@ void coordinate_compress(vector<ll>&axis, ll start=2, ll step=2) {
     for(auto &val:axis)
         val = index[val];
 }
-void coordinate_compress(vector<ll> &axis, vector<ll> &values, map<ll,ll> &index, ll start=2, ll step=2) {
+void coordinate_compress(vll &axis, vll &values, map<ll,ll> &index, ll start=2, ll step=2) {
     for(auto &val:axis)
         index[val] = 0;
     values.resize(start + step*axis.size());
@@ -113,40 +104,154 @@ void coordinate_compress(vector<ll> &axis, vector<ll> &values, map<ll,ll> &index
     for(auto &val:axis)
         val = index[val];
 }
-ll BS(ll left, ll right, ll val, bool first) {
-    while(left < right) {
-        ll mid = left + (right - left + 1) / 2;
-        if(mid < val) left = mid + 1;
-        else if(mid > val) right = mid - 1;
-        else {
-            if(first) right = mid;
-            else left = mid;
-        }
-    }
-    return left;
-}
-ld BS(ld left, ld right, ld val) {
-    while(fabs(right-left) > 10e-7) {
-        ld mid = (left+right)/2;
-        if(mid < val) left = mid;
-        else right = mid;
-    }
-    return left;
-}
-/////////////////////////////////////////////////////////////////////////////////////
 
+ll SS;
+bitset<100000010> BS;
+vll P;
+void sieve(ll sz) { // (1e7 < 1s) <-- O(n loglogn)
+    SS = sz+1;
+    BS.set(); BS[0]= BS[1]=false;
+
+    for(ll i{2}; i<SS; ++i) if(BS[i]) {
+            for(ll j{i*i}; j<SS; j+=i)
+                BS[j]=false;
+            P.pb(i);
+        }
+}
+bool prime(ll n) { // 1e13 ==> (work for N <= (last prime in vll P)^2)
+    if(n < SS) return BS[n];
+    for(ll i{}; i<P.size() and P[i]*P[i]<=n; ++i)
+        if(n%P[i] == 0) return false;
+    return true;
+}
+vll PF(ll n) { // 1e13 ==> (work for N <= (last prime in vll P)^2)
+    vll factors;
+    for(ll i{}; i<P.size() and P[i]*P[i]<=n; ++i) {
+        while(n%P[i] == 0)
+            n/=P[i], factors.pb(P[i]);
+    }
+
+    if(n!=1) factors.pb(n);
+    return factors;
+}
+vll PF() {
+    vll PF_cnt(10000007);
+    for(ll i{2}; i<=PF_cnt.size(); ++i)
+        if(!PF_cnt[i]) // if true then i is prime
+            for(ll j{i}; j<=PF_cnt.size(); j+=i)
+                ++PF_cnt[j];
+    return PF_cnt;
+}
+vll div(ll x) {
+    vll div;
+    for(ll i{1}; i*i<=x; i++)
+        if(x%i == 0) {
+            div.pb(i);
+            if(i*i != x) div.pb(x/i);
+        }
+    return div;
+}
+ll div_cnt(ll n) { // 1e13 ==> (work for N <= (last prime in vll P)^2)
+    ll cnt{};
+    for(ll i{}; i<P.size() and P[i]*P[i]<=n; ++i) {
+        ll power{};
+        while(n%P[i] == 0) n/=P[i], ++power;
+        cnt *= power+1;
+    }
+    return (n!=1)? 2*cnt:cnt;
+}
+ll div_sum(ll n) { // 1e13 ==> (work for N <= (last prime in vll P)^2)
+    ll sum{1};
+    for(ll i{}; i<P.size() and P[i]*P[i]<=n; ++i) {
+        ll multi{P[i]}, total{1};
+        while(n%P[i] == 0) n/=P[i], total+=multi, multi*=P[i];
+        sum *= total;
+    }
+
+    if(n!=1) sum *= (n+1); // N^2-1/N-1 = N+1
+    return sum;
+}
+vector<vll> multi(ll x) { // 2*1e6
+    vector<vll> multi(x+1);
+    for(ll div{}; div<=x; div++)
+        for(ll i{div}; i<=x; i+=div)
+            multi[i].pb(div);
+    return multi;
+}
+ll euler(ll n) { // 1e13 ==> (work for N <= (last prime in vll P)^2)
+    ll co{n};
+    for(ll i{}; i<P.size() and P[i]*P[i]<=n; ++i) {
+        if(n%P[i] == 0) co -= co / P[i];
+        while(n%P[i] == 0) n/=P[i];
+    }
+
+    if(n!=1) co -= co/n;
+    return co;
+}
+vll euler() {
+    vll co(10000007);
+    for(ll i{1}; i<=co.size(); ++i) co[i]=i;
+    for(ll i{2}; i<=co.size(); ++i)
+        if(co[i]==i) // if  true then i is prime
+            for(ll j{i}; j<=co.size(); j+=i)
+                co[j] = (co[j]/i) * (i-1);
+    return co;
+}
+
+ll PP_fact(ll n, ll p) {
+    ll exp{};
+    for(ll i{p}; i<=n; i*=p)
+        exp += n/i;
+    return exp;
+}
+ll fact(ll n) {
+    if(n <= 1) return 1;
+    return (n * fact(n-1))%M;
+}
+ll perm(ll n, ll r) {
+    ll ans{1};
+    for(ll i{n-r+1}; i<=n; i++) {
+        ans *= i;
+        ans %= M;
+    }
+    return ans;
+}
+ll comb(ll n, ll r) {
+    ll ans{1}, div{1};
+    for(ll i{r+1}; i<=n; i++) {
+        ans *= i;
+        ans /= div;
+        div++;
+    }
+    return ans;
+}
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 void fast() {
 
 }
-/////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 int main() { IOS
 #ifndef ONLINE_JUDGE
     freopen("input.txt", "r", stdin); freopen("output.txt", "w", stdout); freopen("error.txt", "w", stderr);
 #endif
     ll tc{1};
-    cin >> tc;
+//    cin >> tc;
     while(tc--) {
         fast();
-        cout << endl;
+//        cout << endl;
     }
+
+//    while(true) {
+////        ll n = 2601;
+//        ll n = rand()%10+1;
+//        if(fast(n) == slow(n)) cout << n << " OK!\n";
+//        else {
+//            cout << "NOT MATCHED!\n";
+//            cout << n << endl << slow(n) << " " << fast(n);
+//            break;
+//        }
+//    }
 }
+
+
+
