@@ -277,7 +277,7 @@ void fast() {
         ll rem{};
         for(ll i=n.size()-1, exp{}; i>=0; i--,exp++) {
             ll dig = n[i]-'0';
-            rem += dig * (ll)big_pow2(10,i);
+            rem += dig * (ll)big_pow2(10,exp);
             rem %= 11;
         }
         if(!rem)
