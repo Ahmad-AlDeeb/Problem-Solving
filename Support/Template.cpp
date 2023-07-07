@@ -18,13 +18,13 @@ using namespace std;
 
 /// CONST variables ///
 const ll inf = 1e18;
-const ll M = 1e9+7;
+const ll M = 998244353;
 const ll SZ = 200005;
 const vll di {0,0,1,-1};
 const vll dj {1,-1,0,0};
 const string letters{"abcdefghijklmnopqrstuvwxyz"};
 const ld PI = 3.14159265358979323846;
-const ld EPS = 1e-20;
+const ld EPS = 1e-18;
 
 ///////// MISC /////////
 ll pow(ll x, ll y) {
@@ -264,10 +264,10 @@ ld dist(const point &p1, const point &p2) {
     return hypot(p1.x-p2.x, p1.y-p2.y);
 }
 ld deg_to_rad(ld d) {
-    return d*M_PI / 180.0;
+    return d*PI / 180.0;
 }
 ld rad_to_deg(ld r) {
-    return r*180.0 / M_PI;
+    return r*180.0 / PI;
 }
 point rotate(const point &p, ld theta) {
     ld rad = deg_to_rad(theta);
@@ -324,7 +324,7 @@ ld angle(const point &a, const point &b, const point &c) {
     return acos( dot(ba,bc) / sqrt(norm_sq(ba) * norm_sq(bc)) );
 }
 ld cross(vec a, vec b) {
-    return a.x*b.y + a.y*b.x;
+    return a.x*b.y - a.y*b.x;
 }
 bool CCW(point p, point q, point r) {
     vec pq = to_vec(p,q), pr = to_vec(p,r);
@@ -360,16 +360,16 @@ ld dist_to_seg(point p, point a, point b, point &c) {
 void fast() {
     
 }
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 int main() { IOS
 #ifndef ONLINE_JUDGE
     freopen("input.txt", "r", stdin); freopen("output.txt", "w", stdout); freopen("error.txt", "w", stderr);
 #endif
     ll tc{1};
-     cin >> tc;
+    cin >> tc;
     while(tc--) {
         fast();
-         cout << endl;
+        cout << endl;
     }
 
     ///////////////// Stress testing /////////////////
