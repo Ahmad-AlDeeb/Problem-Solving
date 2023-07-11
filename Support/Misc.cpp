@@ -1,10 +1,17 @@
+// CONST Variables
 const vll di {0,0,1,-1};
 const vll dj {1,-1,0,0};
 const string letters{"abcdefghijklmnopqrstuvwxyz"};
 const ld PI = 3.14159265358979323846;
+// Golden Ratio (Fib)
 const ld G_pos = (1+sqrt(5))/2;
 const ld G_neg = (1-sqrt(5))/2;
-///////////////////////////////////////
+// Ordered Set
+#include <ext/pb_ds/assoc_container.hpp>
+#include <ext/pb_ds/tree_policy.hpp>
+using namespace __gnu_pbds;
+#define ordered_set tree<long long, null_type, less<>, rb_tree_tag, tree_order_statistics_node_update>
+////////////////////////////////////////////////////////////
 void coordinate_compress(vll &axis, ll start=2, ll step=2) {
     set<ll> s (axis.begin(), axis.end());
     map<ll,ll> index;
