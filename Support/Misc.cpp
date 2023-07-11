@@ -52,7 +52,7 @@ void get_squares(ll n) {
             }
         }
 }
-// maximum subarray with negative values
+// maximum subarray with negative values (Kadane's algorithm)
 ll max_sub(vll &v) {
     ll mx {-MAX}, sum{};
     for (ll i{}; i<v.size(); i++) {
