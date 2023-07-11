@@ -3,9 +3,6 @@ const vll di {0,0,1,-1};
 const vll dj {1,-1,0,0};
 const string letters{"abcdefghijklmnopqrstuvwxyz"};
 const ld PI = 3.14159265358979323846;
-// Golden Ratio (Fib)
-const ld G_pos = (1+sqrt(5))/2;
-const ld G_neg = (1-sqrt(5))/2;
 // Ordered Set
 #include <ext/pb_ds/assoc_container.hpp>
 #include <ext/pb_ds/tree_policy.hpp>
@@ -40,9 +37,6 @@ void coordinate_compress(vll &axis, vll &values, map<ll,ll> &index, ll start=2, 
 pair<ld,ld> quad(ld a, ld b, ld c) {
     ld sq = sqrt(pow(b,2LL)-4*a*c);
     return {-b+(sq)/2*a, -b-(sq)/2*a};
-}
-ll fib(ll n) {
-    return ( pow(G_pos,n) - pow(G_neg,n) ) / (ld)sqrt(5);
 }
 // Difference of 2 squares
 ll a,b;
