@@ -52,6 +52,16 @@ void get_squares(ll n) {
             }
         }
 }
+// maximum subarray with negative values
+ll max_sub(vll &v) {
+    ll mx {-MAX}, sum{};
+    for (ll i{}; i<v.size(); i++) {
+        sum += v[i];
+        mx = max(mx,sum);
+        if (sum < 0) sum = 0;
+    }
+    return mx;
+}
     /////////////// Stress testing /////////////////
    while(true) {
 //        ll n = 2601;
