@@ -1,3 +1,10 @@
+const vll di {0,0,1,-1};
+const vll dj {1,-1,0,0};
+const string letters{"abcdefghijklmnopqrstuvwxyz"};
+const ld PI = 3.14159265358979323846;
+const ld G_pos = (1+sqrt(5))/2;
+const ld G_neg = (1-sqrt(5))/2;
+///////////////////////////////////////
 void coordinate_compress(vll &axis, ll start=2, ll step=2) {
     set<ll> s (axis.begin(), axis.end());
     map<ll,ll> index;
@@ -27,7 +34,10 @@ pair<ld,ld> quad(ld a, ld b, ld c) {
     ld sq = sqrt(pow(b,2LL)-4*a*c);
     return {-b+(sq)/2*a, -b-(sq)/2*a};
 }
-// Difference between 2 squares
+ll fib(ll n) {
+    return ( pow(G_pos,n) - pow(G_neg,n) ) / (ld)sqrt(5);
+}
+// Difference of 2 squares
 ll a,b;
 void get_squares(ll n) {
     for(ll i = sqrt(n); i >= 1; i--)
