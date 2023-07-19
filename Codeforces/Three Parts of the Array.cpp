@@ -1,40 +1,78 @@
-#include<string>
-#include<iostream>
-#include<sstream>
-#include<algorithm>
-#include<cmath>
-#include<iomanip>
-#include<vector>
-#include<queue>
-#include<stack>
-#include<deque>
-#include<set>
-#define x first
-#define y second
-#define dd double
-#define ll long long
-#define ld long double
+#include <bits/stdc++.h>
+using namespace std;
 #define IOS ios::sync_with_stdio(0); cin.tie(0); cout.tie(0);
 #define endl "\n"
-using namespace std;
-#include <ext/pb_ds/assoc_container.hpp>
-#include <ext/pb_ds/tree_policy.hpp>
-using namespace __gnu_pbds;
-#define ordered_set tree<int, null_type,less<int>, rb_tree_tag,tree_order_statistics_node_update>
-
-int main() { IOS
-    ll n; cin >> n;
-    vector<ll>vec(n); for(auto &i:vec) cin >> i;
-
-    ll ans{},a{vec[0]},c{vec[n-1]};
-    for(ll l{},r{n-1}; l<r;) {
-        if(a > c) {r--; c+=vec[r];}
-        else if (a < c) {l++; a+=vec[l];}
-        else {
-            ans = max(a,c);
-            l++; a+=vec[l];
-            r--; c+=vec[r];
-        }
+#define ll long long
+#define ld long double
+#define F first
+#define S second
+#define vll vector<long long>
+#define pb push_back
+#define all(v) v.begin(), v.end()
+///////////////////////////////////
+const vll di {0,0,1,-1};
+const vll dj {1,-1,0,0};
+const string letters{"abcdefghijklmnopqrstuvwxyz"};
+const ll MAX = 1e18;
+const ll M = 1e9+7;
+const ld EPS = 1e-19;
+const ll SZ {101};
+const ld PI = 3.14159265358979323846;
+ll pow(ll x, ll y) {
+    ll ans{1};
+    while(y) {
+        if(y&1) ans *= x;
+        x *= x;
+        y /= 2;
     }
+    return ans;
+}
+ll big_pow(ll x, ll y) {
+    ll ans{1};
+    while(y) {
+        if(y&1) ans = ((ans%M)*(x%M)) % M;
+        x = ((x%M) * (x%M)) %M;
+        y/=2;
+    }
+    return ans;
+}
+bool is_int(ld num) {
+    return num == (ll)num;
+}
+int cmp_d(ld a, ld b) {
+    if(fabs(a-b) <= EPS) return -1;
+    return a>b? 1:0;
+}
+ll mod(ll x, ll m){
+    return (x%m +m) % m;
+}
+///////////////////////////////////////////////// ===== Solution ===== /////////////////////////////////////////////////
+void fast() {
+    ll n; cin >> n;
+    vll v(n); for(auto &i:v) cin >> i;
+
+    ll sum1{},sum2{};
+    ll ans{};
+    for(ll i{},j{n-1}; i<=j;) {
+        if(sum1 <= sum2) {
+            if(sum1==sum2) ans=sum1;
+            sum1 += v[i++];
+        }
+        else sum2 += v[j--];
+    }
+    
+    if(sum1==sum2) ans=sum1;
     cout << ans;
+}
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+int main() { IOS
+#ifndef ONLINE_JUDGE
+    freopen("input.txt", "r", stdin); freopen("output.txt", "w", stdout);
+#endif
+    ll tc{1};
+//    cin >> tc;
+    while(tc--) {
+        fast();
+//        cout << endl;
+    }
 }
