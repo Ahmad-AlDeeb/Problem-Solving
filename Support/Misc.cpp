@@ -35,8 +35,8 @@ void coordinate_compress(vll &axis, vll &values, map<ll,ll> &index, ll start=2, 
         val = index[val];
 }
 pair<ld,ld> quad(ld a, ld b, ld c) {
-    ld sq = sqrt(pow(b,2LL)-4*a*c);
-    return {-b+(sq)/2*a, -b-(sq)/2*a};
+    ld sq = sqrt(abs( (b*b)-4.0*a*c ));
+    return {(-b+sq)/(2*a), (-b-sq)/(2*a)};
 }
 // Difference of 2 squares
 ll a,b;
