@@ -1,16 +1,15 @@
-ll SS; vll P; bitset<100000010> BS;
-void sieve(ll sz) { // (1e7 < 1s) <-- O(n loglogn)
-    SS = sz+1;
-    BS.set(); BS[0]= BS[1]=false;
+vll P; vector<bool> Prime(N,true);
+void sieve() { // (1e7 < 1s) <-- O(n loglogn)
+    Prime[0]= Prime[1]=false;
 
-    for(ll i{2}; i<SS; ++i) if(BS[i]) {
-            for(ll j{i*i}; j<SS; j+=i)
-                BS[j]=false;
+    for(ll i{2}; i<N; ++i) if(Prime[i]) {
+            for(ll composite{i+i}; composite<N; composite+=i)
+                Prime[composite]=false;
             P.pb(i);
         }
 }
 bool prime(ll n) { // 1e13 ==> (work for N <= (last prime in vll P)^2)
-    if(n < SS) return BS[n];
+    if(n < N) return Prime[n];
     for(ll i{}; i<P.size() and P[i]*P[i]<=n; ++i)
         if(n%P[i] == 0) return false;
     return true;
