@@ -49,3 +49,9 @@ ll C(ll n, ll k) {
     if(n<k) return 0;
     return ( ((Fact[n]*inv(Fact[k]))%P) * inv(Fact[n-k]) ) % P;
 }
+ll Cat[N];
+void ini_cat() {
+    Cat[0]=1;
+    for(ll n{}; n<N-1; n++)
+        Cat[n+1] = ((4*n+2)%M * Cat[n]%M * inv(n+2)%M);
+}
