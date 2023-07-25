@@ -39,10 +39,10 @@ const ll P = 1e9+7; // p is a prime number > MAX_N
 ll inv(ll a) {     // Fermat's little theorem
     return mod_pow(a,P-2,P); // O(log p)
 }
-ll Fact[SZ];
+ll Fact[N];
 void ini_fact() { // O(n)
     Fact[0]=1;
-    for(ll i{1}; i<SZ; i++)
+    for(ll i{1}; i<N; i++)
         Fact[i] = (Fact[i-1]*i) % P;
 }
 ll C(ll n, ll k) {
