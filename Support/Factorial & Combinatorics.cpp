@@ -35,19 +35,19 @@ ll mod_pow(ll b, ll p, ll m) {
     if(p&1) ans = mod(ans*b,m);
     return ans;
 }
-const ll P = 1e9+7; // p is a prime number > MAX_N
+// M is a prime number > N
 ll inv(ll a) {     // Fermat's little theorem
-    return mod_pow(a,P-2,P); // O(log p)
+    return mod_pow(a,M-2,M); // O(log p)
 }
 ll Fact[N];
 void ini_fact() { // O(n)
     Fact[0]=1;
     for(ll i{1}; i<N; i++)
-        Fact[i] = (Fact[i-1]*i) % P;
+        Fact[i] = (Fact[i-1]*i) % M;
 }
 ll C(ll n, ll k) {
     if(n<k) return 0;
-    return ( ((Fact[n]*inv(Fact[k]))%P) * inv(Fact[n-k]) ) % P;
+    return ( ((Fact[n] * inv(Fact[k]))%M) * inv(Fact[n-k]) ) % M;
 }
 ll Cat[N];
 void ini_cat() {
