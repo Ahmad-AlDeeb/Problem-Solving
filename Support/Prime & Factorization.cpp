@@ -65,7 +65,7 @@ ll div_sum(ll n) { // 1e13 ==> (work for N <= (last prime in vll P)^2)
 }
 vector<vll> multi(ll x) { // 2*1e6
     vector<vll> multi(x+1);
-    for(ll div{}; div<=x; div++)
+    for(ll div{1}; div<=x; div++)
         for(ll i{div}; i<=x; i+=div)
             multi[i].pb(div);
     return multi;
