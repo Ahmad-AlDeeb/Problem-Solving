@@ -8,6 +8,13 @@ void sieve() { // (1e7 < 1s) <-- O(n loglogn)
             P.pb(i);
         }
 }
+// 49 (N=11)
+// 10201 (N=102)
+// 994009 (N=1003)
+// 99460729 (N=10004)
+// 10000600009 (N=100005)
+// 1000006000009 (N=1000006)
+// 99999820000081 (N=10000007)
 bool prime(ll n) { // 1e13 ==> (work for N <= (last prime in vll P)^2)
     if(n < N) return Prime[n];
     for(ll i{}; i<P.size() and P[i]*P[i]<=n; ++i)
