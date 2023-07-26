@@ -8,6 +8,7 @@ const ld PI = 3.14159265358979323846;
 #include <ext/pb_ds/tree_policy.hpp>
 using namespace __gnu_pbds;
 #define ordered_set 
+
 tree<long long, null_type, less<>, rb_tree_tag, tree_order_statistics_node_update>
 ////////////////////////////////////////////////////////////
 void coordinate_compress(vll &axis, ll start=2, ll step=2) {
