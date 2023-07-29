@@ -10,8 +10,9 @@ using namespace std;
 #define pb push_back
 #define all(v) v.begin(), v.end()
 ///////////////////////////////////
+const ll N = 1e5+5;
+const ll M = 1e9+7;
 const ll MAX = 1e18;
-const ll M = 998244353;
 const ld EPS = 1e-19;
 ll pow(ll x, ll y) {
     ll ans{1};
@@ -43,7 +44,7 @@ ll mod(ll x, ll m){
 }
 ///////////////////////////////////////////////// ===== Solution ===== /////////////////////////////////////////////////
 void fast() {
-
+    
 }
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 int main() { IOS
@@ -52,7 +53,7 @@ int main() { IOS
 #endif
     ll tc{1};
 //    cin >> tc;
-    while(tc--) {
+    for(ll i{1}; i<=tc; i++) {
         fast();
 //        cout << endl;
     }
