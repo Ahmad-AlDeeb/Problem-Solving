@@ -52,9 +52,10 @@ int main() { IOS
     freopen("input.txt", "r", stdin); freopen("output.txt", "w", stdout);
 #endif
     ll tc{1};
-//    cin >> tc;
+    cin >> tc;
     for(ll i{1}; i<=tc; i++) {
+//        cout << "Case " << i << ": ";
         fast();
-//        cout << endl;
+        cout << endl;
     }
 }
