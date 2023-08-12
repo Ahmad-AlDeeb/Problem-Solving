@@ -32,14 +32,6 @@ void get_all_submasks(ll n) {
 ll bits_count(ll n) {
     return (ll)log2(n)+1;
 }
-pair<ll,ll> bits_count(ll n) {
-    ll zero{}, one{};
-    while(n) {
-        if(n&1) one++; else zero++;
-        n >>= 1;
-    }
-    return {zero,one};
-}
 ll ones_cnt(ll n) { // or use __builtin_popcount()
     ll cnt{};
     while(n) {
@@ -92,35 +84,20 @@ for(ll i=x.size()-1; i>=0; i--)
 ///////// Get all subsets in strings to try all combination /////////
 vector<string>subsets;
 void print_bits(ll n, ll size) {
+    reverse(all(sub));
+    subsets.pb(sub);
     string sub;
     for(ll i{}; i<size; i++)
         sub += to_string(1 & (n>>i));
-    reverse(all(sub));
-    subsets.pb(sub);
 }
 void get_subsets(ll size) {
     for(ll i{}; i<(1<<size); i++)
         print_bits(i,size);
 }
 
-///////////////////// My New Functions ///////////////////
+///////////////////// My New Function ///////////////////
 ll get_fullset(ll n) {
     for(ll i{};;i++)
         if(pow(2,i) > n)
             return pow(2,i)-1;
-}
-ll get_flipped(ll n) {
-    string binary;
-    while(n) {
-        if(n%2 == 0) binary.pb('0');
-        else binary.pb('1');
-        n /= 2;
-    }
- 
-    ll result{};
-    for(ll i{}; i<binary.size(); i++) {
-        if(binary[i]=='0')
-            result += pow(2,i);
-    }
-    return result;
 }
