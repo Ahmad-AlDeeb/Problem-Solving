@@ -5,7 +5,7 @@
 - Write highlights (if not easy)
 - Trace samples (if not easy)
 ## **2. Thinking: (if not initiative)**
-- Brainstorm on papers
+- Brainstorm on paper
 - Simplify
 - Think concretely, symbolically, & pictoirally
 - Divide-and-conquer
