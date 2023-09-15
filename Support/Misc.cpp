@@ -63,6 +63,24 @@ ll max_sub(vll &v) {
     }
     return mx;
 }
+///////////////  Monotonic Stack  ///////////////////
+vll NGE(N);
+void get_NGE(vll v, ll n) {
+    stack<ll> s;
+    s.push(v[0]);
+
+    for (ll i = 1; i<n; i++) {
+        if (s.empty()) {
+            s.push(v[i]); continue;
+        }
+
+        while (!s.empty() and s.top() < v[i]) {
+            NGE[s.top()] = i;
+            s.pop();
+        }
+        s.push(v[i]);
+    }
+}
     /////////////// Stress testing /////////////////
    while(true) {
 //        ll n = 2601;
