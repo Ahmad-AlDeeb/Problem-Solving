@@ -19,5 +19,5 @@
 - Analyze performance (if worth it)
 - Check tutorial
 - Check other codes
-- Save best version on GitHub (if worth it)
+- Save best version on GitHub
 - Record lessons learned (if any exist)
