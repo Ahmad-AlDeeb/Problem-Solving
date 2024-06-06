@@ -11,30 +11,16 @@
  */
 class Solution {
 public:
-    vector<int> left, right;
-    bool isSymmetric(TreeNode* root) {
-        if(root->left) traverse_l(root->left);
-        else            left.push_back(-101);
-        if(root->right) traverse_r(root->right);
-        else            right.push_back(-101);
-
-        return left == right;
-    }
-
-    void traverse_l(TreeNode* root) {
-        left.push_back(root->val);
-
-        if(root->left) traverse_l(root->left);
-        else           left.push_back(-101);
-        if(root->right) traverse_l(root->right);
-        else            left.push_back(-101);
-    }
-    void traverse_r(TreeNode* root) {
-        right.push_back(root->val);
+    bool check(TreeNode* left, TreeNode* right) {
+        if(!left & !right) return true;
+        if(!left || !right) return false;
         
-        if(root->right) traverse_r(root->right);
-        else            right.push_back(-101);
-        if(root->left) traverse_r(root->left);
-        else            right.push_back(-101);
+        if(left->val == right->val) 
+            return check(left->left, right->right) && check(left->right, right->left);
+        return false;
+    }
+
+    bool isSymmetric(TreeNode* root) {
+        return check(root->left, root->right);
     }
 };
