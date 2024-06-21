@@ -15,9 +15,9 @@
 ## 4. Debugging:
 ## 5. Testing:
 - Check corner cases
-## 6. Post-AC:
-- Analyze performance (if worth it)
+## 6. Post Accepted:
+- Analyze performance
 - Check tutorial
 - Check other codes
 - Save best version on GitHub
-- Record lessons learned (if any exist)
+- Record lessons learned
