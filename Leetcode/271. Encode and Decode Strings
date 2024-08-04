@@ -1,0 +1,33 @@
+class Solution {
+public:
+
+    string encode(vector<string>& strs) {
+        string encoded_str;
+        
+        for (auto str : strs) {
+            encoded_str += to_string(str.size()) + "!" + str;
+        }
+        
+        return encoded_str;
+    }
+
+    vector<string> decode(string s) {
+        vector<string> decoded_str;
+        
+        int i = 0;
+        while (i < s.size()) {
+            int j = i;
+            while (s[j] != '!') {
+                j++;
+            }
+            int length = stoi(s.substr(i, j - i));
+            
+            string str = s.substr(j + 1, length);
+            decoded_str.push_back(str);
+            
+            i = j + 1 + length;
+        }
+        
+        return decoded_str;
+    }
+};
