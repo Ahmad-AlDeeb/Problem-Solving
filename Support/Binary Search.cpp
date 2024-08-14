@@ -24,11 +24,16 @@ int BS(vector<int>& vec, int target, bool first) {
 
     return ans;
 }
-ld BS(ld left, ld right, ld val) {
-    while(fabs(right-left) > 10e-7) {
-        ld mid = (left+right)/2;
-        if(mid < val) left = mid;
-        else right = mid;
+ld BS(ld l, ld r, ld target) {
+    for(int iter{}; iter<100; ++iter) {
+        ld mid = (l + r) /2;
+        
+        if(mid < target) {
+            left = mid;
+        }
+        else {
+            right = mid;
+        }
     }
     return left;
 }
