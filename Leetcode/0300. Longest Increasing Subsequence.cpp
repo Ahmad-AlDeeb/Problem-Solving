@@ -1,3 +1,4 @@
+// (Take or Leave) Pattern O(n^2) | O(n^2)
 class Solution {
     vector<vector<int>> memory;
     int LIS(int i, int prev_i, vector<int>& nums) {
@@ -23,5 +24,35 @@ public:
     int lengthOfLIS(vector<int>& nums) {
         memory.resize(2500, vector<int>(2500 + 1, -1));
         return LIS(0, 2500, nums);
+    }
+};
+
+// (Take next mask 1) Using windows with starting index O(n^2) | O(n) | More stack friendly
+// Source: Dr Mostafa Saad Algorithm 2 course : https://www.udemy.com/course/skills-algorithms-cpp2/learn/lecture/31594142
+class Solution {
+    vector<int> memory;
+    int LIS(int i, vector<int>& nums) {
+        int &answer = memory[i];
+        if(answer != -1) {
+            return answer;
+        }
+
+        for(int j{i + 1}; j < nums.size(); ++j) {
+            if(nums[i] < nums[j]) {
+                answer = max(answer,LIS(j, nums));
+            }
+        }
+        answer++;
+        return answer;
+    }
+public:
+    int lengthOfLIS(vector<int>& nums) {
+        memory.resize(2500, -1);
+        
+        int answer{};
+        for(int i{}; i < nums.size(); ++i) {
+            answer = max(answer, 1 + LIS(i, nums));
+        }
+        return answer;
     }
 };
