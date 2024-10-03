@@ -56,3 +56,51 @@ public:
         return answer;
     }
 };
+
+// Same as before but better written + Build output function
+int MAX_SIZE = 2500 + 1;
+
+class Solution {
+    vector<int> cache;
+    vector<int> nums;
+
+    int LIS(int i) {
+        int &count = cache[i];
+        if(count != -1) {
+            return count;
+        }
+        count = 0;
+
+        for(int j{i + 1}; j < nums.size(); ++j) {
+            if(nums[i] < nums[j]) {
+                count = max(count, LIS(j));
+            }
+        }
+        count++;
+        return count;
+    }
+
+    void printLIS(int i) {
+        int optimal = LIS(i) - 1;
+
+        for(int j{i + 1}; j < nums.size(); ++j) {
+            if(nums[i] < nums[j]) {
+                int choice = LIS(j);
+                if(optimal == choice) {
+                    cout << nums[j] << " ";
+                    printLIS(j);
+                    break;
+                }
+            }
+        }
+    }
+public:
+    int lengthOfLIS(vector<int>& nums_) {
+        cache.resize(MAX_SIZE, -1);
+        nums = nums_;
+
+        nums.insert(nums.begin(), -INT_MAX);
+        printLIS(0);
+        return LIS(0) - 1;
+    }
+};
