@@ -105,7 +105,7 @@ public:
     }
 };
 
-// Iterative Version (Bottom-up / Tabulation)
+// Iterative Version (Bottom-up / Tabulation) for ---> recursive take-next-element
 const int MAX_SIZE = 2500 + 1;
 
 class Solution {
@@ -130,3 +130,42 @@ public:
         return cache[n - 1] - 1;
     }
 };
+
+// Iterative Version (Bottom-up / Tabulation) for ---> recursive take-or-leave 
+class Solution {
+    int cache[2500 + 1][2500 + 1];
+public:
+    int lengthOfLIS(vector<int>& nums) {
+        int n = nums.size();
+        memset(cache, -1, sizeof(cache));
+
+        for(int i{n - 1}; i >= 0; --i) {
+            for(int prev{}; prev <= i; ++prev) {
+                if(prev == i) {
+                    prev = n;
+                }
+
+                if(i == n - 1) {
+                    if(prev == n || nums[prev] < nums[i]) {
+                        cache[i][prev] = 1; // take 
+                    }
+                    else {
+                        cache[i][prev] = 0; // leave
+                    }
+                }
+                else {
+                    // assert(cache[i + 1][prev] != -1);
+                    int leaveChoice = cache[i + 1][prev];
+                    
+                    int takeChoice{};
+                    if(prev == n || nums[prev] < nums[i]) {
+                        // assert(cache[i + 1][i] != -1);
+                        takeChoice = 1 + cache[i + 1][i];
+                    }
+
+                    cache[i][prev] = max(leaveChoice, takeChoice);
+                }
+            }
+        }
+        return cache[0][n];
+    }
