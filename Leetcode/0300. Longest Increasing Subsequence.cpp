@@ -104,3 +104,29 @@ public:
         return LIS(0) - 1;
     }
 };
+
+// Iterative Version (Bottom-up / Tabulation)
+const int MAX_SIZE = 2500 + 1;
+
+class Solution {
+    int cache[MAX_SIZE];
+public:
+    int lengthOfLIS(vector<int>& nums) {
+        nums.insert(nums.end(), INT_MAX);
+        int n = nums.size();
+        cache[0] = 1;
+
+        for(int i{1}; i < n; ++i) {
+            int &answer = cache[i];
+            answer = 1;
+
+            for(int j{i - 1}; j >= 0; --j) {
+                if(nums[j] < nums[i]) {
+                    answer = max(answer, 1 + cache[j]);
+                }
+            }
+        }
+
+        return cache[n - 1] - 1;
+    }
+};
