@@ -6,6 +6,7 @@ on:
       - main
   schedule:
    - cron: '21 0 * * 5'  # Run every Friday at 21:00 UTC (which is Saturday 00:00 UTC+3)
+  workflow_dispatch:  # Allows you to trigger the workflow manually
 
 jobs:
   update-readme:
