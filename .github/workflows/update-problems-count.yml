@@ -1,0 +1,32 @@
+name: Update README with Solved Problems Count For Each Online Judge
+
+on:
+  push:
+    branches: [ "main" ]
+  # schedule:
+  #  - cron: '21 0 * * 5'  # Run every Friday at 21:00 UTC (which is Saturday 00:00 UTC+3)
+  workflow_dispatch:  # Allows you to trigger the workflow manually
+
+jobs:
+  update-readme:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.x'
+
+    - name: Run script to update README
+      run: python update_problems_count.py
+
+    - name: Commit changes
+      run: |
+        git config --global user.name 'github-actions[bot]'
+        git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+        git add README.md
+        git commit -m "Update file count in README"
+        git push
