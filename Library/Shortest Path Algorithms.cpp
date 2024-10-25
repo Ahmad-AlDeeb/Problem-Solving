@@ -93,12 +93,14 @@ vector<int> Dijkstra(const vector<vector<Edge>> &adjList, int n, int src) {
 		q.pop();
 
 		// The same node might come several times
-		if (vis[minIndex])
-			continue;
+		if (vis[minIndex]) {
+		      continue;
+	    	}
 
 		// Relax with the outgoing edges of the min node
 		for (const auto &edge : adjList[minIndex]) {
-			int to = edge.to, weight = edge.w;
+			int to = edge.to; 
+			int weight = edge.w;
 
 			if (dist[to] > dist[minIndex] + weight) {
 				dist[to] = dist[minIndex] + weight;
