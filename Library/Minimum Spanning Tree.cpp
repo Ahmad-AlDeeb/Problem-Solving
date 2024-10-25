@@ -15,10 +15,10 @@ struct Edge {
 };
 
 int prim(const vector<vector<Edge>> &adjList, int n, int src) {
-	vector<int> dist(n, INF);
+	vector<int> minCost(n, INF);
 	vector<bool> vis(n);
 	dist[src] = 0;
-  int mstCost {};
+	int mstCost {};
 
 	priority_queue<Edge> q;	// small to large
 	q.push(Edge(src, 0));
@@ -28,20 +28,20 @@ int prim(const vector<vector<Edge>> &adjList, int n, int src) {
 		Edge minEdge = q.top();
 		int minIndex = minEdge.to;
 		q.pop();
-
+		
 		// The same node might come several times
 		if (vis[minIndex]) {
-      continue;
-    }
-    mstCost += minEdge.weight;
-
+			continue;
+		}
+		mstCost += minEdge.weight;
+		
 		// Relax with the outgoing edges of the min node
 		for (const auto &edge : adjList[minIndex]) {
 			int to = edge.to;
-      int weight = edge.w;
-
-			if (dist[to] > weight) {
-				dist[to] = weight;
+			int weight = edge.w;
+			
+			if (minCost[to] > weight) {
+				minCost[to] = weight;
 				// Add new edges
 				q.push( {to, dist[to]} );
 			}
