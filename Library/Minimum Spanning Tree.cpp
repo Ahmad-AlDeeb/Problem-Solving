@@ -1,7 +1,7 @@
 /////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////
-// Prim | Greedy | O(E logV)
+// Prim | Greedy | O(E log(V))
 const int INF = (int) 1e6;
 struct Edge {
 	int to, w;
@@ -53,4 +53,67 @@ int prim(const vector<vector<Edge>> &adjList, int n, int src) {
 /////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////
-// Kruskel ???
+// Kruskel | Greedy | O(E log(E))
+class Dsu {
+	vector<int> rank, parent;
+	int treesCount;
+
+	void link(int smallParent, int bigParent) {
+		if (rank[smallParent] > rank[bigParent])
+			swap(smallParent, bigParent);
+
+		parent[smallParent] = bigParent;
+		if (rank[smallParent] == rank[bigParent])
+			rank[bigParent]++;
+	}
+public:
+	Dsu(int n) {
+		rank = vector<int>(n), parent = vector<int>(n);
+		treesCount = n;	
+
+		for (int i = 0; i < n; ++i) {
+			parent[i] = i;
+			rank[i] = 1;
+		}
+	}
+
+	int findParent(int node) {
+		if (node == parent[node])
+			return node;
+		return parent[node] = findParent(parent[node]);
+	}
+
+	bool unionTrees(int node1, int node2) {
+		int parent1 = findParent(node1);
+		int parent2 = findParent(node2);
+		
+		if (parent1 != parent2) {	// Different components
+			link(parent1, parent2);
+			treesCount--;	// 2 merged into 1
+		}
+		return parent1 != parent2;
+	}
+};
+
+struct Edge {
+	int from, to, weight;
+
+	Edge(int from, int to, int weight) : from(from), to(to), weight(weight) {
+	}
+
+	bool operator< (const Edge& e) const {
+		return weight < e.weight;
+	}
+};
+
+int kruskal(vector<Edge>& edges, int n) { 
+	sort(edges.begin(), edges.end());
+	Dsu dsu(n);
+	int mstCost = 0;
+	
+	for(Edge& edge : edges) 
+		if (dsu.unionTrees(edge.from, edge.to)) 
+			mstCost += edge.weight;
+	
+	return mstCost;
+}
