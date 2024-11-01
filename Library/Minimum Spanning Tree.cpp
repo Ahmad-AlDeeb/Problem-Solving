@@ -55,44 +55,44 @@ int prim(const vector<vector<Edge>> &adjList, int n, int src) {
 /////////////////////////////////////////////////////////////////////////////////////
 // Kruskel | Greedy | O(E log(E))
 class Dsu {
-	vector<int> rank, parent;
+	vector<int> ccSize, parent;
 	int treesCount;
 
 	void link(int smallParent, int bigParent) {
-		if (rank[smallParent] > rank[bigParent])
+		if (ccSize[smallParent] > ccSize[bigParent])
 			swap(smallParent, bigParent);
 
 		parent[smallParent] = bigParent;
-		if (rank[smallParent] == rank[bigParent])
-			rank[bigParent]++;
+		if (ccSize[smallParent] == ccSize[bigParent])
+			ccSize[bigParent]++;
 	}
-public:
-	Dsu(int n) {
-		rank = vector<int>(n), parent = vector<int>(n);
-		treesCount = n;	
+    public:
+        Dsu(int n) {
+            ccSize = vector<int>(n), parent = vector<int>(n);
+            treesCount = n;	
 
-		for (int i = 0; i < n; ++i) {
-			parent[i] = i;
-			rank[i] = 1;
-		}
-	}
+            for (int i = 0; i < n; ++i) {
+                parent[i] = i;
+                ccSize[i] = 1;
+            }
+        }
 
-	int findParent(int node) {
-		if (node == parent[node])
-			return node;
-		return parent[node] = findParent(parent[node]);
-	}
+        int findParent(int node) {
+            if (node == parent[node])
+                return node;
+            return parent[node] = findParent(parent[node]);
+        }
 
-	bool unionTrees(int node1, int node2) {
-		int parent1 = findParent(node1);
-		int parent2 = findParent(node2);
-		
-		if (parent1 != parent2) {	// Different components
-			link(parent1, parent2);
-			treesCount--;	// 2 merged into 1
-		}
-		return parent1 != parent2;
-	}
+        bool unionTrees(int node1, int node2) {
+            int parent1 = findParent(node1);
+            int parent2 = findParent(node2);
+            
+            if (parent1 != parent2) {	// Different components
+                link(parent1, parent2);
+                treesCount--;	// 2 merged into 1
+            }
+            return parent1 != parent2;
+    	}
 };
 
 struct Edge {
