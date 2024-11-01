@@ -63,8 +63,7 @@ class Dsu {
 			swap(smallParent, bigParent);
 
 		parent[smallParent] = bigParent;
-		if (ccSize[smallParent] == ccSize[bigParent])
-			ccSize[bigParent]++;
+	        ccSize[bigParent] += ccSize[smallParent];
 	}
     public:
         Dsu(int n) {
