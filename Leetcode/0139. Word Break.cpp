@@ -1,3 +1,5 @@
+///////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////// Recursive DP Solution //////////////////////////////////////
 class Solution {
     string s;
     vector<string> wordDict;
@@ -36,5 +38,40 @@ public:
             }
         }
         return answer = 0;
+    }
+};
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////// BFS Solution //////////////////////////////////////////
+class Solution {
+public:
+    bool wordBreak(string s, vector<string>& wordDict) {
+        unordered_set<string> wordDictSet(wordDict.begin(), wordDict.end());
+        int strSize = s.size();
+        
+        vector<bool> visited(strSize);
+        queue<int> nodes;
+        nodes.push(0);
+
+        while(!nodes.empty()) {
+            int start = nodes.front();
+            nodes.pop();
+
+            if(start == strSize) {
+                return true;
+            }
+
+            for(int end = start + 1; end <= strSize; ++end) {
+                if(visited[end]) {
+                    continue;
+                }
+
+                if(wordDictSet.find(s.substr(start, end - start)) != wordDictSet.end()) {
+                    visited[end] = true;
+                    nodes.push(end);
+                }
+            }
+        }
+        return false;
     }
 };
