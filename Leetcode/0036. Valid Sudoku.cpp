@@ -1,72 +1,72 @@
 class Solution {
-public:
-    bool isValidBlock(vector<vector<char>>& board, int start_i, int start_j) {
-        vector<bool> vis(10);
+  bool checkRows(vector<vector<char>>& board) {
+      for(int i{}; i < 9; ++i) {
+      unordered_map<char, bool> exist;
 
-        for(int i{start_i}, row_count{3}; row_count; i++, row_count--) {
-            for(int j{start_j}, col_count{3}; col_count; j++, col_count--) {
-                char cell = board[i][j];
-                if(cell != '.') {
-                    if(vis[cell-'0']) {
-                        return false;
-                    }
-                    else {
-                        vis[cell-'0'] = true;
-                    }
-                }
-            }
+      for(int j{}; j < 9; ++j) {
+        if(board[i][j] == '.') {
+        	continue;
         }
-
-        return true;
+        
+        if(exist[board[i][j]]) {
+          return false;
+        }
+        exist[board[i][j]] = true;
+      }
     }
+    return true;
+  }
+  
+    bool checkCols(vector<vector<char>>& board) {
+      for(int i{}; i < 9; ++i) {
+      unordered_map<char, bool> exist;
 
+      for(int j{}; j < 9; ++j) {
+        if(board[j][i] == '.') {
+        	continue;
+        }
+      
+        if(exist[board[j][i]]) {
+          return false;
+        }
+        exist[board[j][i]] = true;
+      }
+    }
+    return true;
+  }
+  
+  bool isBoxValid(vector<vector<char>>& board, int rowStart, int colStart) {
+  	unordered_map<char, bool> exist;
+
+    for(int i{rowStart}; i < rowStart+3; ++i) {
+    	
+      
+        for(int j{colStart}; j < colStart+3; ++j) {
+        if(board[i][j] == '.') {
+        	continue;
+        }
+      
+       if(exist[board[i][j]]) {
+          return false;
+        }
+        exist[board[i][j]] = true;
+      }
+    }
+    return true;
+  }
+
+
+public:
     bool isValidSudoku(vector<vector<char>>& board) {
-        // Check horizontally.
-        for(int i{}; i<9; i++) {
-            vector<bool> vis(10);
-            
-            for(int j{}; j<9; j++) {
-                char cell = board[i][j];
-                
-                if(cell != '.') {
-                    if(vis[cell]) {
-                        return false;
-                    }
-                    else {
-                        vis[cell] = true;
-                    }
-                }
-            }
+		
+      for(int rowStart{}; rowStart < 9; rowStart += 3) {
+      	for(int colStart{}; colStart < 9; colStart += 3) {
+        	if(!isBoxValid(board, rowStart, colStart)) {
+          	return false;
+          }
         }
-
-        // Check vertically.
-        for(int j{}; j<9; j++) {
-            vector<bool> vis(10);
-
-            for(int i{}; i<9; i++) {
-                char cell = board[i][j];
-                
-                if(cell != '.') {
-                    if(vis[cell-'0']) {
-                        return false;
-                    }
-                    else {
-                        vis[cell-'0'] = true;
-                    }
-                }
-            }
-        }
-
-        // Check blocks.
-        for(int i{}; i<9; i+=3) {
-            for(int j{}; j<9; j+=3) {
-                if(!isValidBlock(board, i, j)) {
-                    return false;
-                }
-            }
-        }
-
-
-        return true;
+      }
+      
+      return checkRows(board) && checkCols(board);
     }
 };
