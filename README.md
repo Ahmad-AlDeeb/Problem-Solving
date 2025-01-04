@@ -5,9 +5,9 @@
 ![GeeksforGeeks Badge](https://img.shields.io/badge/GeeksforGeeks-2-darkgreen)
 ![HackerRank Badge](https://img.shields.io/badge/HackerRank-7-darkgreen)
 ![Kattis Badge](https://img.shields.io/badge/Kattis-8-darkgreen)
-![Leetcode Badge](https://img.shields.io/badge/Leetcode-209-darkorange)
+![Leetcode Badge](https://img.shields.io/badge/Leetcode-210-darkorange)
 ![LightOJ Badge](https://img.shields.io/badge/LightOJ-5-darkgreen)
 ![SPOJ Badge](https://img.shields.io/badge/SPOJ-8-darkgreen)
 ![UVa Badge](https://img.shields.io/badge/UVa-89-darkblue)
 
-![Total Badge](https://img.shields.io/badge/Total-979-black)
+![Total Badge](https://img.shields.io/badge/Total-980-black)
