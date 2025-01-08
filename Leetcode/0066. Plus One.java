@@ -5,15 +5,13 @@ class Solution {
                 digits[i]++;
                 break;
             }
+            digits[i] = 0;
             
             if(i == 0) {
                 int[] newDigits = new int[digits.length + 1];
                 Arrays.fill(newDigits, 0);
                 newDigits[0] = 1;
                 return newDigits;
-            }
-            else {
-                digits[i] = 0;
             }
         }
         return digits;
