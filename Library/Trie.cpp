@@ -1,5 +1,5 @@
 class TrieNode {
-	map<char, TrieNode*> children;
+	unordered_map<char, TrieNode*> children;
 	bool isEndOfWord{};
 
 public:
